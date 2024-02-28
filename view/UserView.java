@@ -32,13 +32,15 @@ public class UserView {
                     break;
                 case "2":
                     System.out.println("2-로그인");
-                    userController.login(sc);
+                    msg = userController.login(sc);
+                    System.out.println("로그인 결과: "+msg);
                     break;
                 case "3":
                     System.out.println("3-ID 검색");
                     break;
                 case "4":
                     System.out.println("4-비번변경");
+                    msg = userController.login(sc);
                     break;
                 case "5":
                     System.out.println("5-탈퇴");
@@ -58,7 +60,8 @@ public class UserView {
                     break;
                 case "9":
                     System.out.println("9-회원수");
-                    userController.countUsers();
+                    String numberOfUsers = userController.countUsers();
+                    System.out.println("회원수 "+numberOfUsers);
                     break;
             }
         }

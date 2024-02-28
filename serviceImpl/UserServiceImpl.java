@@ -34,18 +34,31 @@ public class UserServiceImpl implements UserService {
                             .build());
         }
         users = map;
-        return users.size() + " 개 더미값 추가";
+        return users.size() + "개 더미값 추가";
 
     }
 
     @Override
     public String join(UserDTO user) {
-        return null;
+        users.put(user.getUsername(), user);
+        return "회원가입 성공";
     }
 
     @Override
     public String login(UserDTO user) {
-        return null;
+        String msg = "";
+        UserDTO userInMap = user.get(user.getUsername());
+        if(userInMap == null){
+            msg = "아이디가 일치하지 않습니다.";
+        }else {
+            if(userInMap.getPassword().equals(user.getPassword())){
+                msg = "로그인 성공";
+            }else {
+                msg = "비밀번호가 일치하지 않습니다.";
+            }
+        }
+
+        return msg;
     }
 
     @Override
@@ -80,11 +93,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public String countUsers() {
-        return null;
+        return users.size()+"";
     }
 
     @Override
     public Map<String, UserDTO> getUserMap() {
-        return null;
+        return users;
     }
 }

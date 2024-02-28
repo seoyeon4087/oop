@@ -102,7 +102,7 @@ public class UserDTO {
                 ", regNumber='" + regNumber + '\'' +
                 ", phoneNumber='" + phoneNumber + '\'' +
                 ", address='" + address + '\'' +
-                ", job='" + job + '\'' +
+                ", job='" + job + '\'' + "\n"+
                 '}';
     }
 
@@ -119,5 +119,9 @@ public class UserDTO {
         this.job = job;
         this.height = height;
         this.weight = weight;
+    }
+
+    public UserDTO get(String username) {
+        return null;
     }
 }

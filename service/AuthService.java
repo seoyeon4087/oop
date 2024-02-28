@@ -1,13 +1,15 @@
 package service;
 
 import model.UserDTO;
-
 import java.util.List;
 import java.util.Map;
 
 public interface AuthService {
 
     String addUsers();
+
+    String count();
+
     String join(UserDTO user);
     String login(UserDTO user);
     UserDTO findUserById(String username);
@@ -22,7 +24,6 @@ public interface AuthService {
 
     Map<String, UserDTO> getUserMap();
 
-    String count();
 }
 //메소드 공통점
 //타입 + 메소드 이름 + 파라미터

@@ -19,7 +19,8 @@ public class AuthController{
 
 
     public String addUsers() {
-        return authService.addUsers();
+        String msg = authService.addUsers();
+        return msg;
     }
 
     public String join(Scanner scanner) {

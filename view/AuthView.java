@@ -1,7 +1,6 @@
 package view;
 
 import controller.AuthController;
-import controller.UserController;
 import model.UserDTO;
 
 import java.util.Map;
@@ -64,7 +63,8 @@ public class AuthView {
                     break;
                 case "9":
                     System.out.println("9-회원수");
-                    authController.countUsers();
+                    String numberOfUsers = authController.countUsers();
+                    System.out.println("회원수 "+numberOfUsers);
                     break;
 
 

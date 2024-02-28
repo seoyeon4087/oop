@@ -8,7 +8,6 @@ import service.UtilService;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public class AuthServiceImpl implements AuthService {
     private static AuthService instance = new AuthServiceImpl();
@@ -19,7 +18,8 @@ public class AuthServiceImpl implements AuthService {
     public static AuthService getInstance(){return instance;}
     @Override
     public String login(UserDTO user) {
-        return null;
+        users.put(user.getUsername(), user);
+        return "회원가입 성공";
     }
 
     @Override
@@ -94,8 +94,7 @@ public class AuthServiceImpl implements AuthService {
                             .build());
         }
         users = map;
-        return "더미값 추가";
-
+        return users.size()+"개 더미값 추가";
     }
 
 

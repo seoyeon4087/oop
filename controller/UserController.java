@@ -16,7 +16,8 @@ public class UserController{
     }
 
     public String addUsers() {
-        return user.addUsers();
+        String msg = user.addUsers();
+        return msg;
     }
     public String countUsers(){
         System.out.println("회원수");
@@ -24,7 +25,7 @@ public class UserController{
     }
 
     public String login(Scanner sc) {
-        System.out.println("로그인할 ID 입력 : ");
+        System.out.println("로그인할 ID, PW 입력 : ");
         return user.login(new UserBuilder()
                 .username(sc.next())
                 .password(sc.next())
@@ -54,4 +55,5 @@ public class UserController{
         System.out.println("전체 목록 출력");
         return user.getUserMap();
     }
+
 }
