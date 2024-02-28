@@ -25,7 +25,9 @@ public class UserController{
     }
 
     public String login(Scanner sc) {
-        System.out.println("로그인할 ID, PW 입력 : ");
+        System.out.println("로그인할 ID" +
+                "비밀번호" +
+                "를 입력해주세요");
         return user.login(new UserBuilder()
                 .username(sc.next())
                 .password(sc.next())
@@ -37,7 +39,7 @@ public class UserController{
                 "비밀번호, " +
                 "비밀번호 확인, " +
                 "이름, " +
-                "주민번호 " +
+                "주민번호, " +
                 "전화번호, " +
                 "주소, " +
                 "직업을 입력해주세요");

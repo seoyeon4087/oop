@@ -16,7 +16,10 @@ public class UserServiceImpl implements UserService {
     private UserServiceImpl() {
         this.users = new HashMap<>();
     }
-    public static UserService getInstance(){return instance;}
+
+    public static UserService getInstance() {
+        return instance;
+    }
 
     @Override
     public String addUsers() {
@@ -47,17 +50,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public String login(UserDTO user) {
         String msg = "";
-        UserDTO userInMap = user.get(user.getUsername());
-        if(userInMap == null){
+        UserDTO userInMap = users.get(user.getUsername());
+        if (userInMap == null) {
             msg = "아이디가 일치하지 않습니다.";
-        }else {
-            if(userInMap.getPassword().equals(user.getPassword())){
-                msg = "로그인 성공";
-            }else {
-                msg = "비밀번호가 일치하지 않습니다.";
-            }
+        } else if (userInMap.getPassword().equals(user.getPassword())){
+            msg = "로그인 성공";
+        } else {
+            msg = "비밀번호가 일치하지 않습니다.";
         }
-
         return msg;
     }
 

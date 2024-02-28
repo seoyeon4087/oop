@@ -37,10 +37,10 @@ public class UserView {
                     break;
                 case "3":
                     System.out.println("3-ID 검색");
+                    System.out.println("당신의 아이디 : "+msg);
                     break;
                 case "4":
                     System.out.println("4-비번변경");
-                    msg = userController.login(sc);
                     break;
                 case "5":
                     System.out.println("5-탈퇴");
