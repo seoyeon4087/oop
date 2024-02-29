@@ -1,5 +1,6 @@
 package model;
 
+
 public class SubjectDTO {
     private int id;
     private int koreanScore;

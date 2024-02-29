@@ -37,10 +37,13 @@ public class UserView {
                     break;
                 case "3":
                     System.out.println("3-ID 검색");
+                    msg = userController.findUserById(sc);
                     System.out.println("당신의 아이디 : "+msg);
                     break;
                 case "4":
                     System.out.println("4-비번변경");
+                    msg = userController.updatePassword(sc);
+                    System.out.println("변경된 비밀번호 : "+msg);
                     break;
                 case "5":
                     System.out.println("5-탈퇴");
@@ -49,11 +52,14 @@ public class UserView {
                     System.out.println("6-회원목록");
                     Map<String, UserDTO> users = userController.getUserMap();
                     users.forEach((k,v)->{
-                        System.out.printf("아이디 : %s, 회원정보: %s", k,v);
+                        System.out.printf("아이디 : %s, 회원정보: %s\n", k,v);
                     });
                     break;
                 case "7":
                     System.out.println("7-이름검색");
+                    UserController.findUsersByName(sc).forEach((i)->{
+                        System.out.println(i);
+                    });
                     break;
                 case "8":
                     System.out.println("8-직업검색");

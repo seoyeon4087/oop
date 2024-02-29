@@ -5,9 +5,7 @@ import model.UserDTO;
 import service.UserService;
 import service.UtilService;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class UserServiceImpl implements UserService {
     private static UserService instance = new UserServiceImpl();
@@ -50,7 +48,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public String login(UserDTO user) {
         String msg = "";
-        UserDTO userInMap = users.get(user.getUsername());
+        UserDTO userInMap = users.get(user.getUsername()); //유저DTO의 객체인 엔트리
         if (userInMap == null) {
             msg = "아이디가 일치하지 않습니다.";
         } else if (userInMap.getPassword().equals(user.getPassword())){
@@ -60,29 +58,33 @@ public class UserServiceImpl implements UserService {
         }
         return msg;
     }
+    // DS entry 필드
 
     @Override
     public UserDTO findUserById(String username) {
-        return null;
+        return users.get(username);
     }
 
     @Override
     public String updatePassword(UserDTO user) {
-        return null;
+        users.get(user.getUsername()).setPassword(user.getPassword());
+        return "비밀번호 변경 성공";
     }
 
     @Override
     public String deleteUser(String username) {
-        return null;
+        users.remove(username);
+        return "회원 삭제";
     }
 
     @Override
     public List<UserDTO> getUserList() {
-        return null;
+        return new ArrayList<>(users.values());
     }
 
     @Override
     public List<UserDTO> findUsersByName(String name) {
+        new ArrayList<>(users.values()).stream();
         return null;
     }
 
