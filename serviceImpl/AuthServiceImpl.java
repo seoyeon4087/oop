@@ -1,92 +1,92 @@
 package serviceImpl;
 
-import builder.UserBuilder;
-import model.UserDTO;
+import model.User;
 import service.AuthService;
 import service.UtilService;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class AuthServiceImpl implements AuthService {
     private static AuthService instance = new AuthServiceImpl();
-    Map<String, UserDTO> users;
+    Map<String, User> users;
+    List<User> List;
+
+    public List<User> userList(){
+        this.users = new HashMap<>();
+        return null;
+    }
     private AuthServiceImpl(){
         this.users = new HashMap<>();
     }
     public static AuthService getInstance(){return instance;}
     @Override
-    public String login(UserDTO user) {
+    public String join(User user) {
         users.put(user.getUsername(), user);
         return "회원가입 성공";
     }
 
     @Override
-    public UserDTO findUserById(String username) {
-        return null;
+    public String login(User user) {
+        return users.getOrDefault(user.getUsername(), User.builder().password("").build())
+                .getPassword()
+                .equals(user.getPassword()) ?
+                "로그인 성공" : "로그인 실패";
     }
 
     @Override
-    public String updatePassword(UserDTO user) {
-        return null;
+    public User findUserById(String username) {
+        return users.get(username);
+    }
+
+    @Override
+    public String updatePassword(User user) {
+        users.get(user.getUsername()).setPassword(user.getPassword());
+
+        return "비번 변경 성공";
     }
 
     @Override
     public String deleteUser(String username) {
+        users.remove(username);
+        return "회원삭제";
+    }
+
+    @Override
+    public List<User> getUserList() {
+        return  new ArrayList<>(users.values());
+    }
+
+    @Override
+    public List<User> findUsersByName(String name) {
+
         return null;
     }
 
     @Override
-    public List<UserDTO> getUserList() {
-        return null;
-    }
+    public List<User> findUsersByJob(String job) {
 
-    @Override
-    public List<UserDTO> findUsersByName(String name) {
-        return null;
-    }
-
-    @Override
-    public List<UserDTO> findUsersByJob(String job) {
         return null;
     }
 
     @Override
     public String countUsers() {
-        return null;
+        return users.size()+"";
     }
 
     @Override
-    public UserDTO findUser(String username) {
-        return null;
-    }
-
-    @Override
-    public Map<String, UserDTO> getUserMap() {
+    public Map<String, User> getUserMap() {
         return users;
     }
 
     @Override
-    public String count() {
-        return users.size() + "";
-    }
-
-    @Override
-    public String join(UserDTO user) {
-        users.put(user.getUsername(),user);
-        return null;
-    }
-
-    @Override
     public String addUsers() {
-        Map<String, UserDTO> map = new HashMap<>();
+        Map<String, User> map = new HashMap<>();
         UtilService util = UtilServiceImpl.getInstance();
 
         for(int i=0; i<5; i++){
             String username = util.createRandomUsername();
             map.put(username,
-                    new UserBuilder()
+                    User.builder()
                             .username(username)
                             .password("1")
                             .confirmPassword("1")
@@ -95,6 +95,7 @@ public class AuthServiceImpl implements AuthService {
         }
         users = map;
         return users.size()+"개 더미값 추가";
+
     }
 
 

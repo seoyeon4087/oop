@@ -14,8 +14,8 @@ public class Main {
             switch (sc.next()){
                 case "0":  return;
                 case "1": AuthView.main(sc);break;
-                case "2": GradeView.main(sc); break;
-                case "3": BoardView.main(); break;
+//                case "2": GradeView.main(sc); break;
+//                case "3": BoardView.main(); break;
                 case "4": KaupView.main(sc); break;
                 case "5": UserView.main(sc); break;
                 case "6": AccountView.main(sc); break;

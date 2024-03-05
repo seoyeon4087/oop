@@ -1,17 +1,27 @@
 package serviceImpl;
 
-import model.UserDTO;
+import model.User;
 import service.KaupService;
-import service.UtilService;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class KaupServiceImpl implements KaupService {
+
+    Map<String, ?> map;
+    List<?> List;
     private static KaupService instance = new KaupServiceImpl();
-    private KaupServiceImpl(){}
+    private KaupServiceImpl(){
+        this.List = new ArrayList<>();
+        this.map = new HashMap<>();
+    }
 
     public static KaupService getInstance(){return instance;}
 
     @Override
-    public String createBMI(UserDTO user) {
+    public String createBMI(User user) {
         double height = user.getHeight();
         double weight = user.getWeight();
         double bmi = (height/(weight*weight)*10000);

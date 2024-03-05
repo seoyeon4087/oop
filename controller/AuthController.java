@@ -1,7 +1,6 @@
 package controller;
 
-import builder.UserBuilder;
-import model.UserDTO;
+import model.User;
 import service.AuthService;
 import serviceImpl.AuthServiceImpl;
 
@@ -19,8 +18,7 @@ public class AuthController{
 
 
     public String addUsers() {
-        String msg = authService.addUsers();
-        return msg;
+        return authService.addUsers();
     }
 
     public String join(Scanner scanner) {
@@ -32,10 +30,9 @@ public class AuthController{
                 "전화번호, " +
                 "주소, " +
                 "직업을 입력해주세요");
-        return authService.join(new UserBuilder()
+        return authService.join(User.builder()
                 .username(scanner.next())
                 .password(scanner.next())
-                .confirmPassword(scanner.next())
                 .name(scanner.next())
                 .address(scanner.next())
                 .job(scanner.next())
@@ -44,21 +41,22 @@ public class AuthController{
 
     public String login(Scanner scanner) {
         System.out.println("로그인할 ID 입력 : ");
-        return authService.login(new UserBuilder()
+        return authService.login(User.builder()
                 .username(scanner.next())
                 .password(scanner.next())
                 .build());
     }
 
-    public UserDTO findUserById(Scanner scanner) {
+    public User findUserById(Scanner scanner) {
         System.out.println("검색할 ID 입력 : ");
+
         return authService.findUserById(scanner.next());
     }
 
     public String updatePassword(Scanner scanner) {
         System.out.println("수정할 ID 입력 : ");
         System.out.println("수정할 비번 입력 : ");
-        return authService.updatePassword(new UserBuilder()
+        return authService.updatePassword( User.builder()
                 .username(scanner.next())
                 .password(scanner.next())
                 .build());
@@ -69,17 +67,19 @@ public class AuthController{
         return authService.deleteUser(scanner.next());
     }
 
-    public Map<String, UserDTO> getUserMap() {
+    public Map<String, ?> getUserMap() {
         System.out.println("전체 목록 출력");
         return authService.getUserMap();
     }
 
-    public List<UserDTO> findUsersByName(Scanner scanner) {
+
+
+    public List<?> findUsersByName(Scanner scanner) {
         System.out.println("이름으로 검색");
         return authService.findUsersByName(scanner.next());
     }
 
-    public List<UserDTO> findUsersByJob(Scanner scanner) {
+    public List<?> findUsersByJob(Scanner scanner) {
         System.out.println("직업으로 검색");
         return authService.findUsersByJob(scanner.next());
     }
@@ -88,4 +88,5 @@ public class AuthController{
         System.out.println("회원수");
         return authService.countUsers();
     }
+
 }

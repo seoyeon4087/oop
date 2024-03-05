@@ -1,7 +1,6 @@
 package controller;
 
-import builder.AccountBuilder;
-import model.AccountDTO;
+import model.Account;
 import service.AccountService;
 import serviceImpl.AccountServiceImpl;
 
@@ -9,24 +8,26 @@ import java.util.List;
 import java.util.Scanner;
 
 public class AccountController {
-    AccountService accountcontroller;
+    AccountService accountService;
 
     public AccountController() {
-        this.accountcontroller = AccountServiceImpl.getInstance;
+        this.accountService = AccountServiceImpl.getInstance();
     }
 
     public String createAccount(Scanner sc) {
-        return accountcontroller.createAccount(new AccountBuilder()
+        return accountService.createAccount(Account.builder()
                 .id(sc.nextLong())
                 .accountNumber(sc.next())
                 .accountHolder(sc.next())
                 .balance(sc.nextDouble())
                 .transactionDate(null)
-                .build());
+                .build()
+
+        );
     }
 
     public String deposit(Scanner sc) {
-        return accountcontroller.deposit(new AccountBuilder()
+        return accountService.deposit(Account.builder()
                 .id(sc.nextLong())
                 .accountNumber(sc.next())
                 .accountHolder(sc.next())
@@ -36,7 +37,7 @@ public class AccountController {
     }
 
     public String withdraw(Scanner sc) {
-        return accountcontroller.withdraw(new AccountBuilder()
+        return accountService.withdraw(Account.builder()
                 .id(sc.nextLong())
                 .accountNumber(sc.next())
                 .accountHolder(sc.next())
@@ -46,16 +47,14 @@ public class AccountController {
     }
 
     public String getBalance(Scanner sc) {
-        return accountcontroller.getBalance(sc.next());
+        return accountService.getBalance(sc.next());
     }
+
     public String cancelAccount(Scanner sc) {
-        return accountcontroller.cancelAccount();
+        return accountService.cancelAccount(sc.next());
     }
 
-    public String getAccount(Scanner sc) {
-        return null;
+    public List<Account> getAccounts() {
+        return accountService.AccountDTO();
     }
-
-//    public String getAccount(Scanner sc) {
-//    }
 }

@@ -1,7 +1,6 @@
 package controller;
 
-import builder.UserBuilder;
-import model.UserDTO;
+import model.User;
 import service.UserService;
 import serviceImpl.UserServiceImpl;
 
@@ -10,15 +9,15 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class UserController{
-    UserService userService;
+    static UserService userService;
 
     public UserController() {
-        this.userService = UserServiceImpl.getInstance();
+        this.userService = (UserService) UserServiceImpl.getInstance();
     }
 
-    public static List<UserDTO> findUsersByName(Scanner sc) {
-        System.out.println("이름으로 검색");
-        return userService.findUsersByName(sc.next());
+    public String addUsers() {
+        String msg = userService.addUsers();
+        return msg;
     }
 
     public String join(Scanner sc) {
@@ -30,7 +29,7 @@ public class UserController{
                 "전화번호, " +
                 "주소, " +
                 "직업을 입력해주세요");
-        return userService.join(new UserBuilder()
+        return userService.join(User.builder()
                 .username(sc.next())
                 .password(sc.next())
                 .confirmPassword(sc.next())
@@ -39,43 +38,54 @@ public class UserController{
                 .job(sc.next())
                 .build());
     }
+
     public String login(Scanner sc) {
         System.out.println("로그인할 ID" +
                 "비밀번호" +
                 "를 입력해주세요");
-        return userService.login(new UserBuilder()
+        return userService.login(User.builder()
                 .username(sc.next())
                 .password(sc.next())
                 .build());
     }
-    public String findUserById(Scanner sc) {
-        System.out.println("아이디를 바꾸시려면 이름과 전화번호를 입력해주세요");
-        return userService.login(new UserBuilder()
-                .name(sc.next())
-                .phoneNumber(sc.next())
-                .build());
+
+    public User findUserById(Scanner sc) {
+        System.out.println("검색할 ID 입력 : ");
+
+        return userService.findUserById(sc.next());
     }
 
     public String updatePassword(Scanner sc) {
-        System.out.println("비밀번호 변경하실 " +
-                "아이디 " +
-                "를 입력해주세요");
-        return userService.updatePassword(new UserBuilder()
+        System.out.println("수정할 ID 입력 : ");
+        System.out.println("수정할 비번 입력 : ");
+        return userService.updatePassword(User.builder()
                 .username(sc.next())
+                .password(sc.next())
                 .build());
     }
 
-    public String addUsers() {
-        String msg = userService.addUsers();
-        return msg;
+    public static String deleteUser(Scanner sc) {
+        System.out.println("삭제할 ID 입력 : ");
+        return userService.deleteUser(sc.next());
     }
+
+    public Map<String, ?> getUserMap() {
+        System.out.println("전체 목록 출력");
+        return userService.getUserMap();
+    }
+
+    public static List<?> findUsersByName(Scanner sc) {
+        System.out.println("이름으로 검색");
+        return userService.findUsersByName(sc.next());
+    }
+
+    public static List<?> findUsersByJob(Scanner scanner) {
+        System.out.println("직업으로 검색");
+        return userService.findUsersByJob(scanner.next());
+    }
+
     public String countUsers(){
         System.out.println("회원수");
         return userService.countUsers();
-    }
-
-    public Map<String, UserDTO> getUserMap() {
-        System.out.println("전체 목록 출력");
-        return userService.getUserMap();
     }
 }
